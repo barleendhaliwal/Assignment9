@@ -1,0 +1,32 @@
+//Trigger Function - createdOnFunction --------------------------
+
+BEGIN
+NEW."createdOn" = CURRENT_TIMESTAMP;
+RETURN NEW;
+END;
+-----------------------------------------------------------------
+
+
+
+//Trigger -----------------------------------------
+
+CUSTOMER TABLE:
+CREATE TRIGGER "createdOnTrigger"
+    BEFORE INSERT
+    ON public.customers
+    FOR EACH ROW
+    EXECUTE PROCEDURE public."createdOnFunction"()
+
+ROLE TABLE:
+CREATE TRIGGER "createdOnTrigger"
+    BEFORE INSERT
+    ON public.role
+    FOR EACH ROW
+    EXECUTE PROCEDURE public."createdOnFunction"()
+
+USERS TABLE:
+CREATE TRIGGER "createdOnTrigger"
+    BEFORE INSERT
+    ON public.users
+    FOR EACH ROW
+    EXECUTE PROCEDURE public."createdOnFunction"()
