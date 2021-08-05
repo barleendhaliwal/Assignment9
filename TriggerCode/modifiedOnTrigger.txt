@@ -1,0 +1,31 @@
+//Trigger Function - modifiedOnFunction --------------------------
+
+BEGIN
+NEW."modifiedOn" = CURRENT_TIMESTAMP;
+RETURN NEW;
+END;
+-----------------------------------------------------------------
+
+
+//Trigger -------------------------------------------------------
+
+CUSTOMER TABLE:
+CREATE TRIGGER "modifiedOnTrigger"
+    BEFORE UPDATE OF id, name, website, address
+    ON public.customers
+    FOR EACH ROW
+    EXECUTE PROCEDURE public."modifiedOnFunction"();
+
+ROLE TABLE:
+CREATE TRIGGER "modifiedOnTrigger"
+    BEFORE UPDATE OF key, name, description
+    ON public.role
+    FOR EACH ROW
+    EXECUTE PROCEDURE public."modifiedOnFunction"();
+
+USERS TABLE:
+CREATE TRIGGER "modifiedOnTrigger"
+    BEFORE UPDATE OF id, "firstName", "middleName", "lastName", role, "phoneNumber", address, email, "customerId"
+    ON public.users
+    FOR EACH ROW
+    EXECUTE PROCEDURE public."modifiedOnFunction"();
