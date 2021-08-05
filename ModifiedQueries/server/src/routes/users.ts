@@ -103,8 +103,8 @@ router.post("/", (req: Request, res: Response) => {
                         throw err;
                     }
                     if (resultRole.rows.length == 0) {
-
-                        res.status(400).json({ message: `User Role does not exist !` })
+                        //not allowed
+                        res.status(405).json({ message: `User Role does not exist !` })
                         return;
                       
                     }
@@ -116,8 +116,8 @@ router.post("/", (req: Request, res: Response) => {
                                 throw err;
                             }
                             if (resultCustomer.rows.length == 0) {
-
-                                res.status(400).json({ message: `Customer does not exist !` })
+                                //not allowed
+                                res.status(405).json({ message: `Customer does not exist !` })
                                 return;
                                 
                             }
